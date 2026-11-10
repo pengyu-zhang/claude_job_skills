@@ -1,0 +1,21 @@
+{
+  "_说明": "复制成 materials_config.json 再改。下面是虚构人物 Alex Chen 的例子。",
+  "name": "Alex Chen",
+  "email": "alex.chen@example.com",
+  "contact_must_include": ["+31", "alexchen.example.com"],
+  "sign_off": "Kind regards,",
+  "letter": {"target": [330, 370], "tolerance": [300, 390], "paragraphs": [4, 6]},
+  "statement": {"target": [550, 650], "tolerance": [500, 700]},
+  "banned_phrases": [
+    "unique candidate",
+    "perfect candidate",
+    "ideal candidate",
+    "the lens I want to bring",
+    "the thread that runs through all my work",
+    "My ambition for the next years is",
+    "I am writing to express my interest",
+    "passionate about"
+  ],
+  "identity_red_lines": [],
+  "non_first_author_works": ["RiverBench"]
+}

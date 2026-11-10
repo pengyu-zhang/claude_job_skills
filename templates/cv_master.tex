@@ -1,0 +1,170 @@
+% CV master template. Compile with pdfLaTeX (Overleaf or TeX Live).
+% Everything below is an example: Alex Chen, Northfield University and all papers and numbers are invented.
+% Replace the content with your own. Keep the structure that tools/tailor_cv.py relies on (listed at the top of that script).
+\documentclass[a4paper,10pt]{article}
+
+% ---- fonts ----------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault]{inter}
+\usepackage{microtype}
+\input{glyphtounicode}\pdfgentounicode=1   % clean text extraction for ATS
+\newcommand{\tracked}[1]{\textls[110]{#1}}
+\usepackage[hmargin=2.05cm,vmargin=1.7cm,footskip=0.8cm]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{needspace}
+\usepackage{hyperref}
+
+% ---- palette ------------------------------------------------------
+\definecolor{Accent}{HTML}{5B5BD6}
+\definecolor{AccentDark}{HTML}{4D4DC4}
+\definecolor{Soft}{HTML}{E3E3FD}
+\definecolor{Ink}{HTML}{1F2937}
+\definecolor{Muted}{HTML}{5D6B82}
+\definecolor{Border}{HTML}{E5EAF2}
+
+\hypersetup{colorlinks=true, urlcolor=Accent, linkcolor=Accent, citecolor=Accent,
+            pdftitle={Alex Chen - Curriculum Vitae}, pdfauthor={Alex Chen}}
+
+\color{Ink}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\raggedright
+\hyphenpenalty=10000 \exhyphenpenalty=10000
+\widowpenalty=10000 \clubpenalty=10000
+\linespread{1.08}
+
+% ---- footer ---------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[R]{\footnotesize\color{Muted}Alex Chen\sep page \thepage\ of \pageref*{LastPage}}
+
+% ---- section heading: accent dot + tracked caps + hairline ----------
+\newcommand{\sechead}[1]{%
+  \makebox[\textwidth][l]{%
+    \tikz[baseline=-0.55ex]{\fill[Accent] (0,0) circle (2.3pt);}\hspace{6pt}%
+    {\small\bfseries\color{Accent}\tracked{\MakeUppercase{#1}}}\hspace{10pt}%
+    \color{Border}\leaders\hrule height 0.7pt\hfill}}
+\titleformat{\section}{\normalfont}{}{0pt}{\sechead}
+\titlespacing*{\section}{0pt}{2.6ex}{1.2ex}
+\newcommand{\sectionbreak}{\Needspace{9\baselineskip}}
+
+% ---- helpers --------------------------------------------------------
+\makeatletter
+% dot separator: spacing built in, never breaks before the dot
+\newcommand{\sep}{\unskip\nobreak\hspace{0.45em}\textcolor{Muted}{\textperiodcentered}\hspace{0.45em}\ignorespaces}
+\newcommand{\muted}[1]{\textcolor{Muted}{#1}}
+\newcommand{\pill}[1]{\tikz[baseline=(p.base)]\node[fill=Soft, text=AccentDark, rounded corners=6pt,
+  inner xsep=6pt, inner ysep=2.6pt, outer sep=0pt, font=\footnotesize\bfseries] (p) {#1};\hspace{4pt}}
+\newcommand{\links}[1]{{\small #1}}   % link row after a publication (hyperref sets the colour)
+\newcommand{\me}{\textbf{Alex Chen}}
+
+% left label / right body (no extra gap when it is the first item after a heading)
+\newcommand{\entry}[2]{%
+  \par\if@nobreak\else\vspace{4pt}\fi
+  \begin{minipage}[t]{0.155\textwidth}\raggedright\textcolor{Muted}{\small #1}\end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.825\textwidth}\raggedright #2\end{minipage}\par}
+
+% project header: title, subtitle, venue on the right
+\newcommand{\project}[3]{\par\Needspace{6\baselineskip}\if@nobreak\else\vspace{5pt}\fi\textbf{#1}\ \muted{#2}\hfill\muted{\small #3}\par\nopagebreak\vspace{1pt}}
+
+\newlist{tightitem}{itemize}{1}
+\newlist{publist}{enumerate}{1}
+\setlist[publist]{leftmargin=2.3em, labelsep=0.6em, topsep=1pt, itemsep=2.5pt, parsep=0pt, label=\pubnum}
+\DeclareRobustCommand{\pubnum}{\textcolor{Muted}{[\the\numexpr\pubtotal+1-\csname c@publisti\endcsname\relax]}}
+\newcommand{\pubtotal}{4}  % numbering counts down, newest first
+\setlist[tightitem]{leftmargin=1.1em, topsep=1pt, itemsep=1.5pt, parsep=0pt,
+  label=\textcolor{Accent}{\raisebox{0.15ex}{\scriptsize\textbullet}}}
+\makeatother
+
+%=====================================================================
+\begin{document}
+
+% ============================ HEADER ===============================
+{\Huge\bfseries Alex Chen}\par
+\vspace{2pt}
+{\large\color{Muted}PhD Candidate in Computer Science \sep Northfield University}\par
+\vspace{5pt}
+{\small
+Utrecht, the Netherlands \sep +31 6 0000 0000 \sep \href{mailto:alex.chen@example.com}{alex.chen@example.com}\par
+\vspace{1.5pt}
+\href{https://alexchen.example.com/}{alexchen.example.com} \sep
+\href{https://github.com/example}{GitHub} \sep
+\href{https://www.linkedin.com/in/example/}{LinkedIn}\par}
+
+% ============================ SUMMARY ==============================
+\section{About Me}
+I work on time series forecasting for energy systems, where sensors fail, demand patterns shift and models trained last year stop working. I build forecasting and monitoring models that stay accurate when the data changes, and I release the code and benchmarks behind them.
+
+\vspace{4pt}
+Open to Machine Learning Engineer and Data Scientist roles, and postdoc positions.\par
+\vspace{6pt}
+\pill{Time series forecasting}\pill{Anomaly detection}\pill{Distribution shift}\pill{Energy data}\pill{MLOps}\par
+
+% ============================ EDUCATION ============================
+\section{Education}
+\entry{2022 -- present}{%
+  \textbf{PhD in Computer Science}, Northfield University. Defense planned for 2027.\par
+  Thesis: \textit{Forecasting Under Shift: Robust Models for Energy Time Series}.\par
+  Supervisor Prof. Dr. Jane Doe.}
+\entry{2019 -- 2022}{%
+  \textbf{MSc in Data Science}, Lakeside Institute of Technology.}
+
+% ============================ EXPERIENCE ===========================
+% Role lines group the projects by where they were done.
+% tailor_cv.py reorders only the first group: the \project blocks before the \par\Needspace{8\baselineskip} line.
+\section{Experience}
+{\color{Accent}\bfseries PhD Candidate}\sep Data Systems Lab, Northfield University\hfill\muted{\small 2022 -- present}\par\nopagebreak
+\vspace{1pt}
+Two first-author projects with released code, on load data from about 12,000 smart meters.\par\nopagebreak
+
+\project{GridCast}{Load forecasting under distribution shift}{Example Conference 2025}
+\begin{tightitem}
+  \item Forecasting models are trained on past seasons and then run through weather and tariff changes they have never seen. I designed GridCast, which separates slow seasonal structure from fast local changes and retrains only the fast part.
+  \item Error at a one-year gap drops by \textbf{12\%} against the strongest baseline, with a public benchmark.
+\end{tightitem}
+
+\project{DriftWatch}{Monitoring forecast quality without labels}{under review}
+\begin{tightitem}
+  \item Ground truth for a forecast arrives days later, so a broken model can run unnoticed. I built a monitor that estimates forecast error from input statistics alone and raises an alert when it leaves the training range.
+  \item It flags \textbf{9 of 10} injected sensor faults within one day on the GridCast benchmark.
+\end{tightitem}
+
+\project{RiverBench}{A benchmark for hydrological forecasting}{Example Workshop 2024}
+\begin{tightitem}
+  \item With Sam Lee (lead), we collected ten years of river gauge data from 40 stations and defined forecasting tasks with fixed splits.
+\end{tightitem}
+
+\par\Needspace{8\baselineskip}\vspace{8pt}
+{\color{Accent}\bfseries MSc Student}\sep Lakeside Institute of Technology\hfill\muted{\small 2019 -- 2022}\par\nopagebreak
+\project{MeterClean}{Cleaning smart meter data}{Example Journal 2022}
+\begin{tightitem}
+  \item I built a pipeline that detects and repairs gaps and spikes in smart meter readings before they reach the forecasting model.
+\end{tightitem}
+
+% ============================ SKILLS ===============================
+\section{Skills}
+\entry{Programming}{Python, SQL, Bash, Git, Linux.}
+\entry{ML tools}{PyTorch, scikit-learn, NumPy, Pandas.}
+\entry{Methods}{Time series forecasting, anomaly detection, distribution shift, probabilistic models.}
+\entry{Languages}{English (fluent), Dutch (basic).}
+
+% ========================== PUBLICATIONS ===========================
+\section{Publications}
+\begin{publist}
+  \item GridCast: Load Forecasting Under Distribution Shift. \me, Jane Doe. \textit{Example Conference 2025}. \links{\href{https://example.com/gridcast}{Paper} \sep \href{https://github.com/example/gridcast}{Code}}
+
+  \item DriftWatch: Monitoring Forecast Quality Without Labels. \me, Jane Doe. Under review.
+
+  \item RiverBench: A Benchmark for Hydrological Forecasting. Sam Lee, \me, Jane Doe. \textit{Example Workshop 2024}.
+
+  \item MeterClean: Cleaning Smart Meter Data at Scale. \me, John Roe. \textit{Example Journal 2022}.
+\end{publist}
+
+\end{document}

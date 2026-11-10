@@ -1,0 +1,10 @@
+# personal files that must never be committed
+tools/materials_config.json
+job_tracker.xlsx
+*.xlsx
+applications/
+__pycache__/
+*.pyc
+*.aux
+*.log
+*.out
